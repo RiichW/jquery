@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<scrip>
+			var Animal={"name":"nike","food":"fish"};
+			var cat;
+			var dog;
+			
+			var cat={"food":"鱼"};
+            var dog={"food":"骨头"};
+            
+            var eat=function(name){
+                console.log(name+"喜欢吃"+this.food);
+            }
+            
+            eat.call(cat,"波斯猫");
+            eat.call(dog,"拉不拉多");
+            eat.call();
+		</scrip>
+	</body>
+</html>

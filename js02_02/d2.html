@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var data = [{
+                id: 1,
+                name: "tom"
+            }, {
+                id: 2,
+                name: "rose"
+            }, {
+                id: 3,
+                name: "mark"
+            }, {
+                id: 4,
+                name: "jack"
+            }, {
+                id: 5,
+                "name": "lucy"
+            }];
+            var ul = document.createElement("ul");
+            for(var i = 0; i < data.length; i++) {
+                var li = document.createElement("li");
+                li.innerHTML = data[i].name;
+                
+                var span=document.createElement("span");
+                span.innerText=" 删除";
+                span.setAttribute("data-id",data[i].id);
+                li.appendChild(span);
+                
+                span.onclick=function(){
+                    var id=this.getAttribute("data-id");
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].id==id){
+                            data.splice(i,1);  //从data数组的第i位置开始删除1个元素
+                        }
+                    }
+                    this.parentNode.parentNode.removeChild(this.parentNode);
+                    console.log("还有："+data.length+"个对象"+JSON.stringify(data));
+                }
+                
+                ul.appendChild(li);
+            }
+            document.body.appendChild(ul);
+        </script>
+    </body>
+</html>

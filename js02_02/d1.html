@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			table{
+				margin: auto;
+				 
+				height: 100%;
+			}
+			
+			
+			
+			table {
+				border: 1px solid;
+				width: 100%;
+				height: auto;
+				border-collapse: collapse;
+				margin-bottom: 30px;
+			}
+			
+			td,
+			th {
+				border: 1px solid;
+				font-size: 12px;
+				padding: 2px;
+				text-align: center;
+			}
+			
+			fieldset {
+				border: 1px solid;
+				width: 60%;
+				height: 270px;
+				padding: 10px 20px;
+				float:left
+			}
+			
+			.add_main_btn {
+				width: 80px;
+				height: 25px;
+				margin: 0 10px;
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		
+				<table border="1" width="80%" cellspacing="0">
+				<thead>	
+				<tr>
+					<th>全选</th>
+					<th>商品编号</th>
+					<th>名称</th>
+					<th>价格</th>
+					<th>上货日期</th>
+					<th>是否下架</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody id="tbMain"></tbody> 
+				</table>
+		
+		<!--<div id="foot">
+			
+			商品编号<input type="text"/>*只能输入9位数字<br />
+			商品名称<input type="text" />*长度只能是1-30位<br />
+			商品价格<input />*只能输入正数<br />
+			上货日期<input />*必须选择<br />
+			是否下架<input type="radio" value="0"/>是
+				<input type="radio" />否
+				<input type="button" value="添加" />
+				<input type="button" value="修改" />
+				<input type="button" value="删除" />
+				
+		</div>-->
+		<div id="add_main">
+				<form>
+					
+					<fieldset>
+					<legend>商品详细</legend>
+						<p>
+							<label>商品编号</label>
+							<input type="text" id="goods_id" required="required" onblur="reg_id()"/>
+							<span id="show_reg_id"></span>
+						</p>
+						<p>
+							<label>商品名称</label>
+							<input type="text" id="goods_name" required="required" onblur="reg_name()"/>
+							<span id="show_reg_name"></span>
+						</p>
+						<p>
+							<label>商品价格</label>
+							<input type="text" id="goods_price" required="required" onblur="reg_price()"/>
+							<span id="show_reg_price"></span>
+						</p>
+						<p>
+							<label>上货日期</label>
+							<select id="year">
+								<option>2017</option>
+								<option>2016</option>
+								<option>2015</option>
+							</select>
+							<select id="month">
+							
+							</select>
+							<select id="day">
+							
+							</select>
+							<span></span>
+						</p>
+						<p>
+							<label>是否下架</label>
+							<input type="radio" name="out" id="are" />是
+							<input type="radio" name="out" checked/>否
+						</p>
+						<p style="text-align: center;">
+							<button class="add_main_btn" id="add" onclick="add_goods();return false">添加</button>
+							<button class="add_main_btn" id="update">修改</button>
+							<button class="add_main_btn" id="all_dle">批量删除</button>
+						</p>
+						
+					</fieldset>
+				
+				</form>
+				
+				
+				
+			</div>
+
+		
+		<script>
+			var per = [
+            {id:1,name:'三星note8',price:'5688',time:'2017-9-15'},  
+            {id:2,name:'iPhoneX',price:'8999',time:'2017-8-25'},  
+            {id:3,name:'MIX2',price:'4566',time:'2017-7-04'}  
+            ];   
+
+			window.onload =function(){
+			var tbody = document.getElementById('tbMain');  
+			
+			for(var i=0;i<per.length;i++){
+			var trow = getDataRow(per[i]);
+			tbody.appendChild(trow);
+					}
+            }
+            
+         function getDataRow(h){  
+	     var row = document.createElement('tr'); 
+	     
+	     var qxCell = document.createElement('td');
+	     row.appendChild(qxCell);  
+	     var qxbox = document.createElement('input'); 
+	     qxbox.setAttribute('type','checkbox'); //type="checkbox"  
+	     qxbox.setAttribute('value','全选');
+	     
+	     var idCell = document.createElement('td');
+	     idCell.innerHTML = h.id; 
+	     row.appendChild(idCell); 
+	     
+	     var nameCell = document.createElement('td');
+	     nameCell.innerHTML = h.name;
+	     row.appendChild(nameCell);
+	     
+	     var priceCell = document.createElement('td');
+	     priceCell.innerHTML =h.price;
+	     row.appendChild(priceCell);
+	     
+	     var timeCell = document.createElement('td');
+	     timeCell.innerHTML =h.time;
+	     row.appendChild(timeCell);
+	     
+	     var selectCell = document.createElement('td');
+	     row.appendChild(selectCell);  
+	     var btnbox = document.createElement('input'); 
+	     btnbox.setAttribute('type','checkbox'); //type="checkbox"  
+	     btnbox.setAttribute('value','是否下架');  
+	     
+	   	 var delCell = document.createElement('td');//创建第四列，操作列
+	     row.appendChild(delCell);  
+	     var btnDel = document.createElement('input'); //创建一个input控件  
+	     btnDel.setAttribute('type','button'); //type="button"  
+	     btnDel.setAttribute('value','删除');  
+	     
+	      btnDel.onclick=function(){  
+         		if(confirm("确定删除这一行嘛？")){  
+             this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);  
+            
+             }  
+         }  
+     delCell.appendChild(btnDel);  //把删除按钮加入td，别忘了  
+       
+     return row;
+     }      
+     
+     //添加
+     var datas =[];
+		function add_goods(){
+			
+			var idvle = id.value;
+			var namevle = goods_name.value;
+			var pricevle = price.value;
+			
+			var time = "";
+			time = year.value;
+			time += "-"+month.value;
+			time += "-"+day.value;
+	
+			var out = "";
+			if(are.checked){
+				out = 1;
+			}else{
+				out = 0;
+			}
+			
+			var data = {select:"<input type='checkbox' class='select'/>",id:idvle,name:namevle,price:pricevle,time:time,out:out,action:"<a href='#'>删除</a><a href='#'></a><a href='#'></a>"};
+			
+			datas.push(data);
+			var tr = document.createElement("tr");
+			table.appendChild(tr);
+		
+			for (var i in datas[0]) {	
+				var td = document.createElement("td");
+				tr.appendChild(td);
+				td.innerHTML = datas[0][i];		
+			}
+			
+		
+		}
+
+     
+     
+     //正则
+		var show_reg_id = document.querySelector("#show_reg_id");
+		var show_reg_name = document.querySelector("#show_reg_name");
+		var show_reg_price = document.querySelector("#show_reg_price");
+		
+		function reg_id(){
+			var reg = /^\d{9}$/;
+			var idvle = id.value;
+			if(reg.test(idvle)){
+				show_reg_id.innerHTML = "";
+			}else{
+				show_reg_id.innerHTML = "*只能输入9位数字";
+				show_reg_id.style.cssText = "color:red;font-size: 12px;";
+			}
+		}
+		function reg_name(){
+			var reg = /^\w{1,30}$/;
+			var namevle = goods_name.value;
+			if(reg.test(namevle)){
+				show_reg_name.innerHTML = "";
+			}else{
+				show_reg_name.innerHTML = "*长度只能是1-30位";
+				show_reg_name.style.cssText = "color:red;font-size: 12px;";
+			}
+		}
+		function reg_price(){
+			var reg = /^(\-|\+)?\d+(\.\d+)?$/;
+			var pricevle = price.value;
+			if(reg.test(pricevle)){
+				show_reg_price.innerHTML = "";
+			}else{
+				show_reg_price.innerHTML = "*只能输入正数,如0.98";
+				show_reg_price.style.cssText = "color:red;font-size: 12px;";
+			}
+		}
+		
+		var year = document.querySelector("#year");
+		var month = document.querySelector("#month");
+		var day = document.querySelector("#day");
+			
+		for (var i = 1; i <= 12; i++) {
+			var option = document.createElement("option");
+			option.innerHTML = i;
+			month.appendChild(option)
+		}
+		
+		for (var i = 1; i <= 30; i++) {
+			var option = document.createElement("option");
+			option.innerHTML = i;
+			day.appendChild(option)
+		}
+			
+		
+		var table = document.querySelector("table");
+		var id = document.querySelector("#goods_id");
+		var goods_name = document.querySelector("#goods_name");
+		var price = document.querySelector("#goods_price");
+		var are = document.querySelector("#are");
+		var update = document.querySelector("#update");
+		var all_dle = document.querySelector("#all_dle");
+    
+
+		</script>
+	</body>
+</html>

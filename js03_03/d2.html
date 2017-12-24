@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>跨域请求</h2>
+		<h2 id="message"></h2>
+		<button type="button" id="btnAjax">ajax请求</button>
+		<script src="../js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			$(#btnAjax).click(function(){
+				$.get("http://localhost:12833/Acction/FindUserByld.ashx",,{"id":1001},function(data){
+					log(data);
+				},"text");
+			});
+			
+			function log(msg){
+				$("message")[0].innerHTML+=msg+"<br/>";
+			}
+		</script>
+	</body>
+</html>

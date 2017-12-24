@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var Student = function(){
+				
+				var age = 0;
+				this.getAge=function(){
+					return age;
+				};
+				this.setAge = function(age){
+					if(_age>=18&&_age<=30){
+						this.age=age;
+						}else{
+							throw"年龄必须是18-30岁之间";
+						}
+					}
+				}
+				
+				var rose = new Student();
+				
+				try{
+					rose.setAge(17);
+				}catch(e){
+					console.log(e);
+				}finally{}
+					console.log("完成操作");
+				}
+				
+				var TopStudnet = function(){
+					this.show=function(){
+						console.log("我是一个优秀学生，今年"+this.getAge()+"岁！");
+					}
+				}
+				TopStudent.prototype = new Studnet();
+				
+				var tom = new TopStudnet();
+				
+				tom.setAge(23);
+				
+				tom.show();
+				
+				
+				TopStudent.prototype.getAge = function(){
+					return age=18;
+				}
+				tom.show();
+		</script>
+	</body>
+</html>

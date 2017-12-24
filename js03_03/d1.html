@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>延迟对象</title>
+	</head>
+	<body>
+		<script src="../js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			var myTask = function(){
+				//通过jQuery创建延迟对象
+				var def=$.Deferred();
+				setTimeout(function(){
+					//随机产生一个整数，如果是偶数
+					var n=Math.round(Math.random()*100);
+					if(n%2==0)
+					{
+						console.log("一个耗时的操作终于完成了，n="+n)
+						def.resove();//任务完成
+					}else{
+						console.log("一个耗时的操作失败，n="+n);
+						def.reject();
+					}
+					},3000);
+					return def.promise();
+					}
+			
+			$.when(myTask()).done(function(){
+				console.log("执行成功");
+				}).fail(function(){
+					console.log("执行失败");
+				});
+		</script>
+	</body>
+</html>

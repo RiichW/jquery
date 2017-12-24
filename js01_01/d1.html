@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//js对象
+			var user = {
+				name:"东野圭吾",
+				address:"日本"
+			};
+			console.log(user.age); 
+			
+			var i;
+			console.log(i);
+			
+			function f(n1){
+				console.log(n1);
+			}
+			var result=f();
+			
+			console.log(result);
+			
+			//
+			var user = {
+				name:"新垣结衣",
+				address:"日本"
+			};
+			console.log(typeof(user));
+			console.log(typeof(null));
+			console.log(typeof(undefined));
+			console.log(user.name);
+			console.log(user.age);
+			
+			if(user.age){
+				console.log(user.age);
+			}else{
+				console.log("没有age属性");
+			}
+			//
+			 var i;
+            console.log(!!"");
+            console.log(!!0);
+            console.log(!!+0);
+            console.log(!!-0);
+            console.log(!!NaN);
+            console.log(!!null);
+            console.log(!!undefined);
+            console.log(typeof(i));
+            console.log(!!i);
+            console.log(false);
+            //是否不为数字,is Not a Number
+            console.log(isNaN("Five"));
+            console.log(isNaN("5"));
+		</script>
+	</body>
+</html>
